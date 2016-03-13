@@ -2,9 +2,11 @@ var pageContent = d3.select("#pageContent");
 
 var minWindowDimension = Math.min(window.innerWidth, window.innerHeight);
 var padding = 30;
-var headerHeight = document.getElementById("pageFooter").offsetHeight;
-var width = minWindowDimension - padding - headerHeight;
-var height = minWindowDimension - padding - headerHeight;
+var footerHeight = document.getElementById("pageFooter").offsetHeight;
+var width = minWindowDimension - padding - footerHeight;
+var height = minWindowDimension - padding - footerHeight;
+
+d3.select("#pageFooter").style("margin-top", (window.innerHeight - footerHeight) / 2);
 
 var svg = pageContent.append("svg")
                      .attr("width", width)
