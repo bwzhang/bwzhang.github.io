@@ -6,8 +6,8 @@
 
 body{
     background-size : 100% auto;
-    font-family: 'Lato', serif;
-    background-color: #e8edf3;
+    font-family: 'Arvo', serif;
+    background-color: #e9ece5;
 }
 
 svg {
@@ -37,7 +37,7 @@ ul {
     padding: 0;
     overflow: hidden;
     text-align: center;
-    background-color: black;
+    background-color: #3b3a36;
 }
 
 li {
@@ -48,7 +48,6 @@ li a {
     box-sizing: border-box;
     border-bottom: 3px solid transparent;
     display: block;
-    color: white;
     text-align: center;
     padding: 10px 14px;
     text-decoration: none;

@@ -18,6 +18,14 @@ pixer.addState("links", links);
 pixer.addState("projects", projects);
 pixer.addState("box", box);
 
+// Set colors
+var color1 = "#e9ece5";
+var color2 = "#3b3a36";
+d3.select("body").style("background-color", color1);
+d3.selectAll("a").style("color", color1);
+d3.select("ul").style("background-color", color2);
+pixer.rects.style("fill", color2);
+
 // Set default state
 pixer.setState("about");
 var currentState = "about";
