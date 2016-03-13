@@ -6,8 +6,6 @@ var footerHeight = document.getElementById("pageFooter").offsetHeight;
 var width = minWindowDimension - padding - footerHeight;
 var height = minWindowDimension - padding - footerHeight;
 
-d3.select("#pageFooter").style("margin-top", (window.innerHeight - footerHeight) / 2);
-
 var svg = pageContent.append("svg")
                      .attr("width", width)
                      .attr("height", height);
