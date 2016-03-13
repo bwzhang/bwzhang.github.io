@@ -10,6 +10,24 @@ body{
     background-color: #e9ece5;
 }
 
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    width: 25%;
+}
+
 svg {
     display: block;
     margin: auto;
