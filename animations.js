@@ -13,7 +13,7 @@ var svg = pageContent.append("svg")
 var pixer = new Pixer(svg, 50, 50);
 
 // Add states for animations
-pixer.addState("about", initials);
+pixer.addState("about", about);
 pixer.addState("links", links);
 pixer.addState("projects", projects);
 pixer.addState("box", box);
