@@ -54,20 +54,11 @@ Pixer.prototype.transition = function (stateName1, stateName2, progress) {
     return this.setPositions(this.transitionPositions(stateName1, stateName2, progress));
 };
 
-Pixer.prototype.timedTransition = function (stateName1, stateName2, time) {
-    var i = 0;
-    var intervalLength = 5;
-    var iterations = time / intervalLength;
-    var intervalId = window.setInterval(function () {
-        pixer.transition("state1", "state2", i / iterations);
-        i++;
-        if (i > iterations) {
-            stopTransitioning();
-        }
-    }, intervalLength);
-    function stopTransitioning() {
-        window.clearInterval(intervalId);
-    }
+Pixer.prototype.transitionTimed = function (stateName1, stateName2, time) {
+    var statePositions1 = this.states[stateName1];
+    var statePositions2 = this.states[stateName2];
+    this.setPositions(statePositions1);
+    return this.setPositionsTimed(statePositions2, time);
 }
 
 // Returns the positions at a given progress point during the transition between states
@@ -101,5 +92,22 @@ Pixer.prototype.setPositions = function (positions) {
     this.rects.attr("y", function (d) {
         return yOffset + (d.y * (rectHeight + 1));
     });
+    return this;
+};
+
+// Updates the positions of all the rects according to the positions array
+Pixer.prototype.setPositionsTimed = function (positions, time) {
+    this.rects.data(positions).enter();
+    var xOffset = this.xOffset;
+    var yOffset = this.yOffset;
+    var rectWidth = this.rectWidth;
+    var rectHeight = this.rectHeight;
+    this.rects.transition().duration(time)
+                           .attr("x", function (d) {
+                               return xOffset + (d.x * (rectWidth + 1));
+                           })
+                           .attr("y", function (d) {
+                               return yOffset + (d.y * (rectHeight + 1));
+                           });
     return this;
 };

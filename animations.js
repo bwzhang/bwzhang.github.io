@@ -1,28 +1,101 @@
-var width = 500;
-var height = 500;
+var pageContent = d3.select("#pageContent");
 
-var svg = d3.select("body").append("svg")
-                           .attr("width", width)
-                           .attr("height", height);
+var minWindowDimension = Math.min(window.innerWidth, window.innerHeight);
+var padding = 30;
+var headerHeight = document.getElementById("pageFooter").offsetHeight;
+var width = minWindowDimension - padding - headerHeight;
+var height = minWindowDimension - padding - headerHeight;
+
+var svg = pageContent.append("svg")
+                     .attr("width", width)
+                     .attr("height", height);
 
 var pixer = new Pixer(svg, 50, 50);
 
-var state2 = [];
-for (var i = 0; i < 50; i++) {
-    state2.push({x: i, y: i});
+// Add states for animations
+pixer.addState("about", initials);
+pixer.addState("links", links);
+pixer.addState("projects", projects);
+pixer.addState("box", box);
+
+// Set default state
+pixer.setState("about");
+var currentState = "about";
+
+var sectionNames = ["about", "links", "projects"];
+
+var sectionButtons = {};
+sectionNames.forEach(function (sectionName) {
+    sectionButtons[sectionName] = d3.select("#" + sectionName);
+});
+
+var transitionTime = 750;
+
+//
+// Add listeners for buttons
+//
+
+function clearAllTimeouts() {
+    var id = window.setTimeout(function() {}, 0);
+    while (id--) {
+        window.clearTimeout(id);
+    }
 }
-pixer.addState("state1", initials);
-pixer.addState("state2", box);
 
-pixer.setState("state1");
+// Change image on hover
+sectionNames.forEach(function (sectionName) {
+    var button = sectionButtons[sectionName];
+    button.on("mouseover", function () {
+        // Clear all timeouts, so nothing randomly pops up
+        clearAllTimeouts();
+        var name = sectionName;
+        pixer.transitionTimed(currentState, name, transitionTime);
+        currentState = sectionName;
+        hideContent();
+        d3.selectAll("li").attr("class", null);
+    });
+});
 
-pixer.timedTransition("state1", "state2", 2000);
-//svg.on('mousemove', function() {
-    //var coords = [0, 0];
-    //coords = d3.mouse(this);
-    //var x = coords[0];
-    //var y = coords[1];
-    //var progress = x / width;
-    //pixer.transition("state1", "state2", progress);
-//});
+// Show page content on click
+sectionNames.forEach(function (sectionName) {
+    var button = sectionButtons[sectionName];
+    button.on("click", function () {
+        // Clear all timeouts, so nothing randomly pops up
+        clearAllTimeouts();
+        pixer.transitionTimed(currentState, "box", transitionTime);
+        currentState = "box";
+        setTimeout(function () {
+            showContent(sectionName);
+        }, transitionTime);
+        button.attr("class", "active");
+    });
+});
 
+var sectionContent = {};
+
+sectionNames.forEach(function (sectionName) {
+    var request = new XMLHttpRequest();
+    request.open('GET', sectionName + ".html");
+    request.onreadystatechange = function () {
+        sectionContent[sectionName] = request.responseText;
+    }
+    request.send();
+});
+
+// Adds content to svg
+function showContent(sectionName) {
+    var marginSize = pixer.rectWidth + 1;
+    var contentWidth = width - (marginSize * 2)
+    var contentHeight = height - (marginSize * 2)
+    var content = svg.append("foreignObject")
+                     .attr("x", marginSize)
+                     .attr("y", marginSize)
+                     .attr("width", contentWidth)
+                     .attr("height", contentHeight);
+    content.html(sectionContent[sectionName]);
+}
+
+// Deletes content from svg
+function hideContent() {
+    svg.select("foreignObject").remove();;
+}
