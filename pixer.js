@@ -35,22 +35,40 @@ Pixer.prototype.addState = function (stateName, statePositions) {
         }
     } else {
         // Pad the new state with extra positions
-        for (var i = 0; i < this.rects.size() - statePositions.length; i++) {
-            var lastPosition = statePositions[statePositions.length - 1];
+        var originalLength = statePositions.length;
+        for (var i = 0; i < this.rects.size() - originalLength; i++) {
+            var lastPosition = statePositions[i % originalLength];
             statePositions.push(lastPosition);
         }
     }
+    return this;
 };
 
 // Updates the locations of the rects to the given state
 Pixer.prototype.setState = function (stateName) {
-    this.setPositions(this.states[stateName]);
+    return this.setPositions(this.states[stateName]);
 }
 
 // Transitions to the given progress point and updates the locations of the rects
 Pixer.prototype.transition = function (stateName1, stateName2, progress) {
-    this.setPositions(this.transitionPositions(stateName1, stateName2, progress));
+    return this.setPositions(this.transitionPositions(stateName1, stateName2, progress));
 };
+
+Pixer.prototype.timedTransition = function (stateName1, stateName2, time) {
+    var i = 0;
+    var intervalLength = 5;
+    var iterations = time / intervalLength;
+    var intervalId = window.setInterval(function () {
+        pixer.transition("state1", "state2", i / iterations);
+        i++;
+        if (i > iterations) {
+            stopTransitioning();
+        }
+    }, intervalLength);
+    function stopTransitioning() {
+        window.clearInterval(intervalId);
+    }
+}
 
 // Returns the positions at a given progress point during the transition between states
 Pixer.prototype.transitionPositions = function (stateName1, stateName2, progress) {
@@ -83,4 +101,5 @@ Pixer.prototype.setPositions = function (positions) {
     this.rects.attr("y", function (d) {
         return yOffset + (d.y * (rectHeight + 1));
     });
+    return this;
 };
