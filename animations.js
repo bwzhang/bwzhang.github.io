@@ -65,6 +65,7 @@ function handleHover(sectionName) {
     currentState = sectionName;
     hideContent();
     d3.selectAll("li").attr("class", null);
+    svg.on("click", function () { handleClick(sectionName); });
 }
 
 function handleClick(sectionName) {
@@ -91,11 +92,7 @@ sectionNames.forEach(function (sectionName) {
 // Show page content on click
 sectionNames.forEach(function (sectionName) {
     var button = sectionButtons[sectionName];
-    if (window.mobileAndTabletCheck()) {
-        svg.on("click", function () { handleClick(sectionName); });
-    } else {
-        button.on("click", function () { handleClick(sectionName); });
-    }
+    button.on("click", function () { handleClick(sectionName); });
 });
 
 var sectionContent = {};
