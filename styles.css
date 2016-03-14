@@ -64,6 +64,7 @@ li {
 }
 
 li a {
+    font-weight: bold;
     box-sizing: border-box;
     border-bottom: 3px solid transparent;
     display: block;
