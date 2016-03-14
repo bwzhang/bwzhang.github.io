@@ -76,7 +76,7 @@ function handleClick(sectionName) {
     setTimeout(function () {
         showContent(sectionName);
     }, transitionTime);
-    button.attr("class", "active");
+    d3.select("#" + sectionName).attr("class", "active");
 }
 
 // Change image on hover
