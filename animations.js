@@ -92,7 +92,9 @@ sectionNames.forEach(function (sectionName) {
 // Show page content on click
 sectionNames.forEach(function (sectionName) {
     var button = sectionButtons[sectionName];
-    button.on("click", function () { handleClick(sectionName); });
+    if (!window.mobileAndTabletCheck()) {
+        button.on("click", function () { handleClick(sectionName); });
+    }
 });
 
 var sectionContent = {};
