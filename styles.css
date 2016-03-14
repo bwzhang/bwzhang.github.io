@@ -5,9 +5,9 @@
 }
 
 body{
-    background-size : 100% auto;
+    background-color: #F5F4ED;
+    background-image: url(concrete_seamless.png);
     font-family: 'Arvo', serif;
-    background-color: #e9ece5;
 }
 
 img {
