@@ -63,9 +63,9 @@ function handleHover(sectionName) {
     var name = sectionName;
     pixer.transitionTimed(currentState, name, transitionTime);
     currentState = sectionName;
+    svg.on("click", function () { handleClick(sectionName); });
     hideContent();
     d3.selectAll("li").attr("class", null);
-    svg.on("click", function () { handleClick(sectionName); });
 }
 
 function handleClick(sectionName) {
