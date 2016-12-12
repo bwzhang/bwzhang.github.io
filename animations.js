@@ -123,5 +123,5 @@ function showContent(sectionName) {
 
 // Deletes content from svg
 function hideContent() {
-    svg.select("foreignObject").remove();;
+    svg.select("foreignObject").remove();
 }
