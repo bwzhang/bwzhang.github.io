@@ -99,13 +99,15 @@ svg {
     float: left;
     clear: none;
     width: 100%;
+    border-bottom: 3px solid;
+    margin-bottom: 10px;
 }
 
 #name {
     /*transform: rotate(-7deg);*/
     font-size: 500%;
     font-family: 'Ludicrous';
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 0px;
 }
 

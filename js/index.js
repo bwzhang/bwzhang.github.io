@@ -1,7 +1,7 @@
 var pageContent = d3.select("#pageContent");
 
 var minWindowDimension = Math.min(window.innerWidth, window.innerHeight);
-var padding = 40;
+var padding = 50;
 var headerHeight = document.getElementById("name").offsetHeight;
 var footerHeight = document.getElementById("pageFooter").offsetHeight;
 var width = minWindowDimension - padding - footerHeight - headerHeight;
