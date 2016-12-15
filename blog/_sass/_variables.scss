@@ -17,7 +17,7 @@ $base-color: #000000;
 $base-lighten-color: lighten($base-color, 10);
 
 $background-color: #F3E4B2;
-$background-over-color: darken($background-color, 50);
+$background-over-color: lighten($background-color, 50);
 
 $text-color: #333;
 $link-color: #268bd2;
