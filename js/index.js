@@ -30,15 +30,27 @@ var currentState = "default";
 
 var transitionTime = 1300;
 
-function onHover(sectionName) {
-    pixer.transitionTimed(currentState, sectionName, transitionTime);
-    currentState = sectionName;
+function transition(state) {
+    pixer.transitionTimed(currentState, state, transitionTime);
+    currentState = state;
 }
 
 // Change image on hover
 var sectionNames = ["email", "github", "linkedin", "resume"];
 sectionNames.forEach(function (sectionName) {
-    d3.select("#" + sectionName).on("mouseover", function () { onHover(sectionName); });
+    d3.select("#" + sectionName).on("mouseover", function () { transition(sectionName); });
 });
 
-d3.select("#name").on("mouseover", function () { onHover("default"); });
+d3.select("#name").on("mouseover", function () { transition("default"); });
+
+d3.select("#name").on("click", function () {
+    var blog = d3.select("#blog");
+    var blogHeight = blog.style("height");
+    if (blogHeight == "0px") {
+        blog.style("overflow", "scroll")
+        blog.style("height", "calc(100% - 80px)")
+    } else {
+        blog.style("overflow", "hidden")
+        blog.style("height", "0")
+    }
+});

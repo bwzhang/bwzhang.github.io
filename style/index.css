@@ -42,11 +42,35 @@ svg {
 }
 
 #pageContent {
-    margin-top: 10px;
     float: left;
-    clear: none;
-    height: 100%;
     width: 100%;
+}
+
+#blog {
+    background-color: #F3E4B2;
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    /*height: calc(100% - 120px);*/
+    height: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#wrapper {
+    z-index: -1;
+    margin-top: 20px;
+    height: calc(100% - 100px);
+    clear: none;
+    width: 100%;
+}
+
+#blog, #wrapper {
+    position: absolute;
+    top: 80px;
+    left: 0px;
 }
 
 @font-face {
@@ -99,13 +123,12 @@ svg {
     float: left;
     clear: none;
     width: 100%;
+    height: 80px;
     border-bottom: 3px solid;
-    margin-bottom: 10px;
 }
 
 #name {
-    /*transform: rotate(-7deg);*/
-    font-size: 500%;
+    font-size: 300%;
     font-family: 'Ludicrous';
     padding-top: 20px;
     padding-bottom: 0px;
