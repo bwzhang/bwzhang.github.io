@@ -140,11 +140,6 @@ body {
 .list {
   &-post {
     padding: 4% 2%;
-    &:hover {
-    background-color: $background-over-color;
-    border-color: transparent;
-    border-radius: 10px;
-    }
 
     a {
       color: $base-color;
@@ -253,10 +248,7 @@ body {
 			color: $base-color;
 
 			&:hover {
-				color: $base-color;
 				text-decoration: none;
-				background-color: $background-over-color;
-		    border-color: transparent;
       }
 		}
   }
@@ -273,10 +265,7 @@ body {
         color: $base-color;
 
         &:hover {
-  				color: $base-color;
   				text-decoration: none;
-  				background-color: $background-over-color;
-  		    border-color: transparent;
         }
 
       }
